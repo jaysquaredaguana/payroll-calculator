@@ -8,31 +8,47 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
+        String name = getEmployeeName(input);
+        double hoursWorked = getHoursWorked(input);
+        double payRate = getPayRate(input);
+
+        double grossPay = calculateGrossPay(hoursWorked, payRate);
+
+        displayPayroll(name, grossPay);
+
+        input.close();
+    }
+
+    public static String getEmployeeName(Scanner input) {
         System.out.print("Enter employee name: ");
-        String name = input.nextLine();
+        return input.nextLine();
+    }
 
+    public static double getHoursWorked(Scanner input) {
         System.out.print("Enter hours worked: ");
-        double hoursWorked = input.nextDouble();
+        return input.nextDouble();
+    }
 
+    public static double getPayRate(Scanner input) {
         System.out.print("Enter pay rate: ");
-        double payRate = input.nextDouble();
+        return input.nextDouble();
+    }
 
-        double grossPay;
-
+    public static double calculateGrossPay(double hoursWorked, double payRate) {
         if (hoursWorked > 40) {
             double regularPay = 40 * payRate;
             double overtimeHours = hoursWorked - 40;
             double overtimePay = overtimeHours * payRate * 1.5;
 
-            grossPay = regularPay + overtimePay;
+            return regularPay + overtimePay;
         }
         else {
-            grossPay = hoursWorked * payRate;
+            return hoursWorked * payRate;
         }
+    }
 
+    public static void displayPayroll(String name, double grossPay) {
         System.out.println("\nEmployee Name: " + name);
         System.out.printf("Gross Pay: $%.2f%n", grossPay);
-
-        input.close();
     }
 }
